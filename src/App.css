@@ -1,0 +1,37 @@
+:root {
+  /* Primary Colors */
+  --bs-primary: #4CAF50;
+  --bs-secondary: #2196F3;
+  --bs-success: #4CAF50;
+  --bs-info: #2196F3;
+  --bs-warning: #FF9800;
+  --bs-danger: #f44336;
+
+  /* Background and Surface */
+  --bs-body-bg: #F5F5F5;
+  --bs-body-color: #212121;
+  --bs-card-bg: #FFFFFF;
+  --bs-card-border-color: #E0E0E0;
+
+  /* Buttons */
+  --bs-btn-border-radius: 0.375rem;
+  --bs-btn-hover-border-color: #45A049;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Poppins', sans-serif;
+}
+
+.category-container {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.category-container button {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
