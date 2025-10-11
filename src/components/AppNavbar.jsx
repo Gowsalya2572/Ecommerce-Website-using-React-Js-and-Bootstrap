@@ -18,19 +18,26 @@ function AppNavbar({ onSearch }) {
     navigate('/');
   };
 
+   const getDashboardPath = () => {
+    if (!user) return "/login";
+    if (user.role === "admin") return "/admin-dashboard";
+    if (user.role === "artisan") return "/artisan-dashboard";
+    return "/dashboard";
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#636B2F' }}>
+    <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#014224' }}>
   <div className="container-fluid">
-    {/* Logo */}
+    
     <NavLink className="navbar-brand" to="/dashboard" style={{ color: '#FFFFFF' }}>
       {/* <img src="https://via.placeholder.com/50" alt="Logo" style={{ height: '40px' }} /> */}
       <h2>Go Shopping</h2>
     </NavLink>
 
-    {/* Links */}
+   
     <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
       <li className="nav-item">
-        <NavLink to="/dashboard" className="nav-link" style={{ color: '#FFFFFF' }}>Home</NavLink>
+        <NavLink to="/" className="nav-link" href="#home" style={{ color: '#FFFFFF' }}>Home</NavLink>
       </li>
       <li className="nav-item">
         <NavLink to="/products" className="nav-link" style={{ color: '#FFFFFF' }}>Products</NavLink>
@@ -50,7 +57,7 @@ function AppNavbar({ onSearch }) {
         type="search"
         placeholder="Search products"
         onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ borderColor: '#bac095', border: '1px solid #BAC095',color:'#636B2F' }}
+        style={{ borderColor: '#bac095', border: '1px solid #BAC095',color:'#FFFFFF' }}
       />
       <button className="btn me-3" style={{ borderColor: '#BAC095', color: '#FFFFFF' }} type="submit">Search</button>
     </form>
@@ -63,11 +70,23 @@ function AppNavbar({ onSearch }) {
        {user ? (
         <>
               <div className="dropdown">
-  <button className="btn btn-outline-secondary dropdown-toggle" type="button" id="userMenu"
+  <button className="btn btn-outline-success dropdown-toggle" type="button" id="userMenu"
     data-bs-toggle="dropdown" aria-expanded="false">
     <i className="bi bi-person-circle"></i> {user.name}
   </button>
   <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+     <li>
+                   <NavLink
+                      className="dropdown-item"
+                      to={getDashboardPath()}
+                    >
+                      {user.role === "admin"
+                        ? "Admin Dashboard"
+                        : user.role === "artisan"
+                        ? "Artisan Dashboard"
+                        : "User Dashboard"}
+                    </NavLink>
+                  </li>
     <li><NavLink className="dropdown-item" to="/profile">Profile</NavLink></li>
     <li><NavLink className="dropdown-item" to="/settings">Settings</NavLink></li>
     <li><hr className="dropdown-divider" /></li>
@@ -78,8 +97,8 @@ function AppNavbar({ onSearch }) {
 </>
             ) : (
               <>
-                <NavLink to="/login" className="btn btn-outline-success">Login</NavLink>
-                <NavLink to="/register" className="btn btn-outline-success">Sign Up</NavLink>
+                <NavLink to="/login" className="btn btn-outline-success text-light">Login</NavLink>
+                <NavLink to="/register" className="btn btn-outline-success bg-success text-light">Sign Up</NavLink>
               </>
             )}
     </div>
@@ -92,6 +111,6 @@ function AppNavbar({ onSearch }) {
 export default AppNavbar;
 
 
-
+ 
 
 

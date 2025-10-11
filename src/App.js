@@ -10,7 +10,8 @@ import Navbar from './components/AppNavbar';
 import './App.css';
 import Home from './components/Home';
 import ProductList from './components/ProductList';
-import ArtisanPanel from './components/ArtisanPanel';
+import ArtisanRoute from './components/ArtisanRoute';
+import ArtisanDashboard from './components/ArtisanDashboard';
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
   return (
     <Router>
       <Navbar onSearch={handleSearch}/>
-      <div className="container mt-4">
+      <div className="container mt-4" >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -35,8 +36,14 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/admin" element={<AdminPanel />} />
-          <Route path="/artisan" element={<ArtisanPanel />} />
+          <Route path="/admin-dashboard" element={<AdminPanel />} />
+          <Route path="/artisan-dashboard" element={
+    <ArtisanRoute>
+      <ArtisanDashboard />
+    </ArtisanRoute>
+  }
+/>
+
         </Routes>
       </div>
     </Router>
