@@ -1,7 +1,8 @@
-// src/components/Products.js
 import React, { useState, useEffect } from 'react';
 import Pagination from 'react-bootstrap/Pagination';
-import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import { useCart } from "../context/CartContext";
 import 'react-toastify/dist/ReactToastify.css';
 
 // Mock data with 30 products including images
@@ -42,9 +43,10 @@ const mockProducts = [
 function ProductList({ searchTerm }) {
    const [filter, setFilter] = useState(searchTerm || '');
    const [currentPage, setCurrentPage] = useState(1);
-   const [cart, setCart] = useState([]);
    const itemsPerPage = 6;
-
+   const navigate = useNavigate();
+   const { cart, addToCart } = useCart();
+ 
   useEffect(() => {
     setFilter(searchTerm || '');
     setCurrentPage(1);
@@ -59,19 +61,13 @@ function ProductList({ searchTerm }) {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentProducts = filteredProducts.slice(startIndex, startIndex + itemsPerPage);
 
-  const handleAddToCart = (product) => {
-    setCart((prevCart) => {
-      const existing = prevCart.find((item) => item.id === product.id);
-      if (existing) {
-        // If already in cart, increase quantity
-        return prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      }
-      // If not in cart, add it
-      return [...prevCart, { ...product, quantity: 1 }];
-    });
+   const handleAddToCart = (product) => {
+    addToCart(product);
     toast.success(`${product.name} added to cart!`);
+  };
+
+  const handleViewCart = () => {
+    navigate('/cart');
   };
 
   const paginationItems = [];
@@ -89,6 +85,7 @@ function ProductList({ searchTerm }) {
 
   return (
     <div className="container mt-4">
+      <ToastContainer position="top-right" autoClose={1500} />
       <h2 className='text-center mb-4'>Products</h2>
 
       <input
@@ -109,7 +106,7 @@ function ProductList({ searchTerm }) {
                   <h5>{product.name}</h5>
                   <p>Category: {product.category}</p>
                   <p>₹{product.price}</p>
-                  <button className="btn btn-primary">Add to Cart</button>
+                  <button className="btn btn-primary" onClick={() => handleAddToCart(product)}>Add to Cart</button>
                 </div>
               </div>
             </div>
@@ -132,7 +129,7 @@ function ProductList({ searchTerm }) {
           <h4>🛍️ Cart Summary</h4>
           <p>Total Items: {cart.reduce((sum, item) => sum + item.quantity, 0)}</p>
           <p>Total Price: ₹{cart.reduce((sum, item) => sum + item.price * item.quantity, 0)}</p>
-          <button className="btn btn-success">Go to Checkout</button>
+          <button className="btn btn-success"  onClick={handleViewCart}>Go to Checkout</button>
         </div>
       )}
 
