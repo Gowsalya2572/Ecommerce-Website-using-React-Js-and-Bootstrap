@@ -1,11 +1,14 @@
 import React, { useState , useContext} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import {useCart} from '../context/CartContext';
 
 function AppNavbar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+    const { cart } = useCart();
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -63,10 +66,23 @@ function AppNavbar({ onSearch }) {
     </form>
 
     {/* Action Buttons */}
-    <div className="d-flex gap-3">
-      <NavLink to="/cart" className="btn" style={{ borderColor: '#BAC095', color: '#FFFFFF' }}>
-        <i className="bi bi-cart"></i> Cart
-      </NavLink>
+    <div className="d-flex  me-3">
+      <NavLink
+    to="/cart"
+    className="text-white position-relative text-decoration-none"
+    style={{ fontSize: "1.5rem" }}
+  >🛒
+    {totalItems > 0 && (
+      <span
+        className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+        style={{ fontSize: "0.7rem" }}
+      >
+        {totalItems}
+      </span>
+    )}
+  </NavLink>
+  </div>
+  <div className="d-flex gap-3">
        {user ? (
         <>
               <div className="dropdown">
