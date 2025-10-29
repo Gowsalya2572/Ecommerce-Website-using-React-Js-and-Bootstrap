@@ -35,3 +35,8 @@ h1, h2, h3, h4 {
   display: inline-block;
   margin-right: 0.5rem;
 }
+
+.pagination-success .page-item.active .page-link {
+  background-color: #198754 !important;
+  border-color: #198754 !important;
+}

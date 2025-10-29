@@ -1,80 +1,92 @@
-// pages/ArtisanDashboard.js
-import React, { useState } from "react";
+
+
+import React, { useState, useContext } from "react";
+import { ProductContext } from "../context/ProductContext";
 
 function ArtisanDashboard() {
-  const [products, setProducts] = useState([]);
+  const { products, addProduct } = useContext(ProductContext);
   const [form, setForm] = useState({ name: "", price: "", category: "", image: "" });
 
-  // Add Product
   const handleAdd = (e) => {
     e.preventDefault();
-    setProducts([...products, { id: Date.now(), ...form }]);
+    addProduct(form);
     setForm({ name: "", price: "", category: "", image: "" });
-  };
-
-  // Update Product
-  const handleUpdate = (id, updated) => {
-    setProducts(products.map((p) => (p.id === id ? { ...p, ...updated } : p)));
-  };
-
-  // Delete Product
-  const handleDelete = (id) => {
-    setProducts(products.filter((p) => p.id !== id));
   };
 
   return (
     <div className="container mt-4">
-      <h2>🎨 Artisan Dashboard</h2>
+      <h2 className="mb-4">🎨 Artisan Dashboard</h2>
 
-      {/* Add Product Form */}
-      <form onSubmit={handleAdd} className="mb-4">
-        <input
-          type="text"
-          placeholder="Product Name"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          required
-        />
-        <input
-          type="number"
-          placeholder="Price"
-          value={form.price}
-          onChange={(e) => setForm({ ...form, price: e.target.value })}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Category"
-          value={form.category}
-          onChange={(e) => setForm({ ...form, category: e.target.value })}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Image URL"
-          value={form.image}
-          onChange={(e) => setForm({ ...form, image: e.target.value })}
-        />
-        <button type="submit">Add Product</button>
+      <form onSubmit={handleAdd} className="row g-3 mb-4">
+        <div className="col-md-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Product Name"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            required
+          />
+        </div>
+        <div className="col-md-2">
+          <input
+            type="number"
+            className="form-control"
+            placeholder="Price"
+            value={form.price}
+            onChange={(e) => setForm({ ...form, price: e.target.value })}
+            required
+          />
+        </div>
+        <div className="col-md-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Category"
+            value={form.category}
+            onChange={(e) => setForm({ ...form, category: e.target.value })}
+            required
+          />
+        </div>
+        <div className="col-md-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Image URL"
+            value={form.image}
+            onChange={(e) => setForm({ ...form, image: e.target.value })}
+          />
+        </div>
+        <div className="col-md-1">
+          <button type="submit" className="btn btn-success w-100">
+            Add
+          </button>
+        </div>
       </form>
 
-      {/* Product List */}
-      <h3>Your Products</h3>
+      <h4>Your Added Products</h4>
       <div className="row">
-        {products.map((p) => (
-          <div key={p.id} className="col-md-3">
-            <div className="card">
-              <img src={p.image} alt={p.name} className="card-img-top" />
-              <div className="card-body">
-                <h5>{p.name}</h5>
-                <p>₹{p.price}</p>
-                <p>{p.category}</p>
-                <button onClick={() => handleDelete(p.id)} className="btn btn-danger btn-sm">Delete</button>
-                <button onClick={() => handleUpdate(p.id, { name: p.name + " (Updated)" })} className="btn btn-warning btn-sm ms-2">Update</button>
+        {products.length === 0 ? (
+          <p>No products added yet.</p>
+        ) : (
+          products.map((p) => (
+            <div key={p.id} className="col-md-3 mb-3">
+              <div className="card h-100">
+                <img
+                  src={p.image || "https://via.placeholder.com/150"}
+                  className="card-img-top"
+                  alt={p.name}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{p.name}</h5>
+                  <p className="card-text">₹{p.price}</p>
+                  <p className="text-muted">{p.category}</p>
+                  <span className="badge bg-warning text-dark">{p.status}</span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

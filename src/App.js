@@ -13,6 +13,7 @@ import ProductList from './components/ProductList';
 import ArtisanRoute from './components/ArtisanRoute';
 import ArtisanDashboard from './components/ArtisanDashboard';
 import { CartProvider } from './context/CartContext';
+import { ProductProvider } from './context/ProductContext';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <CartProvider>
+      <ProductProvider>
     <Router>
       <Navbar onSearch={handleSearch}/>
       <div className="container mt-4" >
@@ -45,10 +47,10 @@ function App() {
     </ArtisanRoute>
   }
 />
-
         </Routes>
       </div>
     </Router>
+    </ProductProvider>
     </CartProvider>
      
   );

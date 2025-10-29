@@ -5,51 +5,218 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCart } from "../context/CartContext";
 
-const mockProducts = [
-    {
-      id: 1,
-      name: "Handcrafted Silver Necklace",
-      category: "Jewelry",
-      price: 89.99,
-      image: "https://images.unsplash.com/photo-1599487488170-02f8a81b2f15",
-    },
-    {
-      id: 2,
-      name: "Ceramic Tea Set",
-      category: "Pottery & Ceramics",
-      price: 124.5,
-      image: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f",
-    },
-    {
-      id: 3,
-      name: "Knitted Wool Scarf",
-      category: "Textiles & Fabrics",
-      price: 45.0,
-      image: "https://images.unsplash.com/photo-1555685812-4b943f1cb0eb",
-    },
-    {
-      id: 4,
-      name: "Turquoise Bead Bracelet",
-      category: "Jewelry",
-      price: 54.0,
-      image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3",
-    },
-    {
-      id: 5,
-      name: "Hand-painted Greeting Cards",
-      category: "Paper Crafts",
-      price: 39.5,
-      image: "https://images.unsplash.com/photo-1600508772922-0e36f4c7b6f1",
-    },
-    {
-      id: 6,
-      name: "Artist Paint Brush Set",
-      category: "Art & Supplies",
-      price: 99.0,
-      image: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df",
-    },
-  ];
-
+ const mockProducts = [
+  {
+    id: 1,
+    name: "Handcrafted Silver Necklace",
+    category: "Jewelry",
+    price: 89.99,
+    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 2,
+    name: "Ceramic Tea Set",
+    category: "Pottery & Ceramics",
+    price: 124.5,
+    image: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f",
+  },
+  {
+    id: 3,
+    name: "Knitted Wool Scarf",
+    category: "Textiles & Fabrics",
+    price: 45.0,
+    image: "https://images.unsplash.com/photo-1555685812-4b943f1cb0eb",
+  },
+  {
+    id: 4,
+    name: "Turquoise Bead Bracelet",
+    category: "Jewelry",
+    price: 54.0,
+    image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3",
+  },
+  {
+    id: 5,
+    name: "Hand-painted Greeting Cards",
+    category: "Paper Crafts",
+    price: 39.5,
+    image: "https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 6,
+    name: "Artist Paint Brush Set",
+    category: "Art & Supplies",
+    price: 99.0,
+    image: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df",
+  },
+  {
+    id: 7,
+    name: "Macrame Wall Hanging",
+    category: "Home Decor",
+    price: 75.99,
+    image: "https://images.unsplash.com/photo-1601044807399-f86d5d2f38cf",
+  },
+  {
+    id: 8,
+    name: "Scented Soy Candle",
+    category: "Home Decor",
+    price: 32.5,
+    image: "https://images.unsplash.com/photo-1598300056390-4c4b70b06c27",
+  },
+  {
+    id: 9,
+    name: "Handwoven Basket",
+    category: "Storage & Decor",
+    price: 59.0,
+    image: "https://images.unsplash.com/photo-1590080875830-bb47b9a1c1a1",
+  },
+  {
+    id: 10,
+    name: "Wooden Serving Board",
+    category: "Kitchenware",
+    price: 79.99,
+    image: "https://images.unsplash.com/photo-1577985051167-0e6d09c3e9b9",
+  },
+  {
+    id: 11,
+    name: "Minimalist Clay Vase",
+    category: "Pottery & Ceramics",
+    price: 69.5,
+    image: "https://images.unsplash.com/photo-1590080875830-bb47b9a1c1a1",
+  },
+  {
+    id: 12,
+    name: "Handmade Leather Wallet",
+    category: "Accessories",
+    price: 120.0,
+    image: "https://images.unsplash.com/photo-1618354691373-d851c1b4b6ec",
+  },
+  {
+    id: 13,
+    name: "Organic Cotton Tote Bag",
+    category: "Textiles & Fabrics",
+    price: 48.0,
+    image: "https://images.unsplash.com/photo-1593032465171-8d2c38e7b59a",
+  },
+  {
+    id: 14,
+    name: "Hand-painted Ceramic Mug",
+    category: "Pottery & Ceramics",
+    price: 35.5,
+    image: "https://images.unsplash.com/photo-1556800734-6e9e76a7e1a7",
+  },
+  {
+    id: 15,
+    name: "Woven Rattan Mirror Frame",
+    category: "Home Decor",
+    price: 95.0,
+    image: "https://images.unsplash.com/photo-1606813902772-9a5a9f1eec61",
+  },
+  {
+    id: 16,
+    name: "Beeswax Candle Set",
+    category: "Home Decor",
+    price: 42.0,
+    image: "https://images.unsplash.com/photo-1600185365483-26d7a4cfb934",
+  },
+  {
+    id: 17,
+    name: "Crochet Plant Hanger",
+    category: "Garden & Plants",
+    price: 37.5,
+    image: "https://images.unsplash.com/photo-1616628188500-bd57a43e5b02",
+  },
+  {
+    id: 18,
+    name: "Wood Carved Elephant Statue",
+    category: "Art & Sculpture",
+    price: 110.0,
+    image: "https://images.unsplash.com/photo-1598300056390-4c4b70b06c27",
+  },
+  {
+    id: 19,
+    name: "Hand-dyed Cushion Cover",
+    category: "Textiles & Fabrics",
+    price: 55.0,
+    image: "https://images.unsplash.com/photo-1589739904080-8d58a42cc3b2",
+  },
+  {
+    id: 20,
+    name: "Resin Art Coaster Set",
+    category: "Art & Supplies",
+    price: 44.0,
+    image: "https://images.unsplash.com/photo-1616628188500-bd57a43e5b02",
+  },
+  {
+    id: 21,
+    name: "Handcrafted Bamboo Lamp",
+    category: "Lighting",
+    price: 140.0,
+    image: "https://images.unsplash.com/photo-1589739904080-8d58a42cc3b2",
+  },
+  {
+    id: 22,
+    name: "Crochet Baby Blanket",
+    category: "Kids",
+    price: 80.0,
+    image: "https://images.unsplash.com/photo-1588001830300-1e37b190418e",
+  },
+  {
+    id: 23,
+    name: "Handmade Clay Earrings",
+    category: "Jewelry",
+    price: 28.0,
+    image: "https://images.unsplash.com/photo-1586363104863-3a3c2bbf1c6a",
+  },
+  {
+    id: 24,
+    name: "Personalized Wooden Nameplate",
+    category: "Home Decor",
+    price: 99.5,
+    image: "https://images.unsplash.com/photo-1601044807399-f86d5d2f38cf",
+  },
+  {
+    id: 25,
+    name: "Acrylic Landscape Painting",
+    category: "Art & Painting",
+    price: 130.0,
+    image: "https://images.unsplash.com/photo-1602526432602-bb62f2b45d39",
+  },
+  {
+    id: 26,
+    name: "Macrame Keychain",
+    category: "Accessories",
+    price: 22.0,
+    image: "https://images.unsplash.com/photo-1601044807399-f86d5d2f38cf",
+  },
+  {
+    id: 27,
+    name: "Embroidered Table Runner",
+    category: "Home Decor",
+    price: 67.0,
+    image: "https://images.unsplash.com/photo-1602526432602-bb62f2b45d39",
+  },
+  {
+    id: 28,
+    name: "Clay Flower Pot",
+    category: "Pottery & Ceramics",
+    price: 52.0,
+    image: "https://images.unsplash.com/photo-1588001830300-1e37b190418e",
+  },
+  {
+    id: 29,
+    name: "Custom Portrait Sketch",
+    category: "Art & Painting",
+    price: 210.0,
+    image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f",
+  },
+  {
+    id: 30,
+    name: "Hand-carved Wooden Bowl",
+    category: "Kitchenware",
+    price: 88.0,
+    image: "https://images.unsplash.com/photo-1606813902772-9a5a9f1eec61",
+  },
+];
 function ProductList({ searchTerm }) {
   const [filter, setFilter] = useState(searchTerm || "");
   const [currentPage, setCurrentPage] = useState(1);
@@ -99,6 +266,7 @@ function ProductList({ searchTerm }) {
         key={number}
         active={number === currentPage}
         onClick={() => setCurrentPage(number)}
+        className="bg-success"
       >
         {number}
       </Pagination.Item>
@@ -164,7 +332,7 @@ function ProductList({ searchTerm }) {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <Pagination className="justify-content-center mt-4">
+        <Pagination className="justify-content-center mt-4 pagination-success">
           {paginationItems}
         </Pagination>
       )}
